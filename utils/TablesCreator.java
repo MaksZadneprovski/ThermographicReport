@@ -75,7 +75,7 @@ public class TablesCreator {
     public Queue<String> getTablesFromContents() throws IOException {
         Queue<String> tablesQueue = new LinkedList<>();
         XSSFRow row;
-        FileInputStream fis = new FileInputStream(Constants.PATH_TABLES.toString());
+        FileInputStream fis = new FileInputStream(Constants.PATH_TABLESXLSX.toString());
 
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet spreadsheet = workbook.getSheetAt(0);
