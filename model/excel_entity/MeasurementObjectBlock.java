@@ -1,9 +1,7 @@
 package model.excel_entity;
 
-import constants.Constants;
 import data.TempData;
 import lombok.Data;
-import model.excel_entity.ImgEntity;
 
 @Data
 public class MeasurementObjectBlock {

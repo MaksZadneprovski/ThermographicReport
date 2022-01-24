@@ -1,8 +1,6 @@
 package file_visitors;
 
-import constants.Constants;
 import data.TempData;
-
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;

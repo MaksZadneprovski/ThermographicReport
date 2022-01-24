@@ -1,7 +1,4 @@
 
-import data.TempData;
-import security.HttpRequest;
-import security.KeyVerification;
 import utils.*;
 import constants.Constants;
 import file_visitors.AddPhotoIntoQueueFileVisitor;
@@ -26,7 +23,7 @@ public class Main {
         ImgSizeManager.setSizeImage();
 
         // Конвертация PDF to XLSX
-        new PdfToXlsxConverter().convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
+        PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
 
         // Парсинг содержания и добавление заголовков в очередь
         System.out.println("    1 из 14 Парсинг содержания и добавление заголовков в очередь");

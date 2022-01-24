@@ -1,7 +1,5 @@
 package utils;
 
-import com.aspose.pdf.Document;
-import com.aspose.pdf.ExcelSaveOptions;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.pdfbox.text.PDFTextStripperByArea;
@@ -9,26 +7,12 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class PdfToXlsxConverter {
-
-    public void convert(String pathOf, String pathTo){
-        // Load source PDF file
-        Document doc = new Document(pathOf);
-        // Set Excel options
-        ExcelSaveOptions options = new ExcelSaveOptions();
-        // Set minimizing option
-        options.setMinimizeTheNumberOfWorksheets(true);
-        // Set output format
-        options.setFormat(ExcelSaveOptions.ExcelFormat.XLSX);
-        // Convert PDF to XLSX
-        doc.save(pathTo, options);
-    }
 
     public static void convert2(String pathOf, String pathTo) throws IOException
     {

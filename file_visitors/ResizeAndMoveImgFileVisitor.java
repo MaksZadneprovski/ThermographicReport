@@ -2,7 +2,6 @@ package file_visitors;
 
 import model.img.Img;
 import utils.ImageHelper;
-
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;

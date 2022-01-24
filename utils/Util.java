@@ -1,12 +1,8 @@
 package utils;
 
 import constants.Constants;
-import data.TempData;
-import model.excel_entity.MeasurementObjectBlock;
 import model.img.Img;
 import model.img.Type;
-
-import java.util.List;
 
 public class Util {
 
