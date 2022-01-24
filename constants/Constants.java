@@ -73,16 +73,18 @@ public class Constants {
         public static int widthPhotoHorizontal = (int) (285.0 * kPhotoHorizontal);
         public static int heightPhotoHorizontal = (int) (213.0 * kPhotoHorizontal);
 
-        public static final Path PATH_PICTURES = Path.of("D:\\NoosferaProgram\\Pictures");
-        public static final Path PATH_TERMO = Path.of("D:\\NoosferaProgram\\Pictures\\Termo");
-        public static final Path PATH_PHOTO = Path.of("D:\\NoosferaProgram\\Pictures\\Photo");
-        public static final Path PATH_PHOTO_HORIZONTAL = Path.of("D:\\NoosferaProgram\\Pictures\\Photo\\Horizontal");
-        public static final Path PATH_TO_SAVED_TERMO = Path.of("D:\\NoosferaProgram\\Pictures\\ChangedTermo");
-        public static final Path PATH_TO_SAVED_PHOTO = Path.of("D:\\NoosferaProgram\\Pictures\\ChangedPhoto");
+        public static final Path PATH_PICTURES = Path.of("D:\\NoosferaProgram\\pictures");
+        public static final Path PATH_TERMO = Path.of("D:\\NoosferaProgram\\pictures\\Termo");
+        public static final Path PATH_PHOTO = Path.of("D:\\NoosferaProgram\\pictures\\Photo");
+        public static final Path PATH_PHOTO_HORIZONTAL = Path.of("D:\\NoosferaProgram\\pictures\\Photo\\Horizontal");
+        public static final Path PATH_TO_SAVED_TERMO = Path.of("D:\\NoosferaProgram\\pictures\\ChangedTermo");
+        public static final Path PATH_TO_SAVED_PHOTO = Path.of("D:\\NoosferaProgram\\pictures\\ChangedPhoto");
         public static final Path PATH_EXCEL_TEMP = Path.of("D:\\NoosferaProgram\\tempFile.xlsx");
         public static final Path PATH_CREATED_PROTOKOL = Path.of("D:\\NoosferaProgram\\protocol.xlsx");
         public static final Path PATH_HEADERS = Path.of("D:\\NoosferaProgram\\Содержание.xlsx");
         public static final Path PATH_TABLES = Path.of("D:\\NoosferaProgram\\Автоочет.xlsx");
+        public static final Path PATH_TABLESPDF = Path.of("D:\\NoosferaProgram\\Новый отчет.pdf");
+        public static final Path PATH_TABLESXLSX = Path.of("D:\\NoosferaProgram\\Автоочет.xlsx");
 
 
 

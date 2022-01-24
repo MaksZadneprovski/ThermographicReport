@@ -6,23 +6,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 public class ImgPositionManager {
 
     public static void changeShift(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Нужно ли изменить позиционирование картинок?        1 - Да        Enter - Нет");
-        if (scanner.nextLine().equals("1")){
-            System.out.println("Какое изображение вы хотите подвинуть? Фото - 1    Термограмма - 2");
-            int photoType = scanner.next().equals("1") ? 1 :  2;
-            System.out.println("Какой тип изображения вы хотите подвинуть? Вертикальное - 1    Горизонтальное - 2");
-            int positionType = scanner.next().equals("1") ? 1 :  2;
-            System.out.println("Как вы хотите подвинуть? Вертикально - 1    Горизонтально - 2");
-            int orientationType = scanner.next().equals("1") ? 1 :  2;
-            System.out.println("Укажите на сколько нужно сместить");
+        if (UserInput.imgPositionManager1.equals("1")){
+            int photoType = UserInput.imgPositionManager2.equals("1") ? 1 :  2;
+            int positionType = UserInput.imgPositionManager3.equals("1") ? 1 :  2;
+            int orientationType = UserInput.imgPositionManager4.equals("1") ? 1 :  2;
 
-            int shift = Integer.parseInt(scanner.next());
+            int shift = Integer.parseInt(UserInput.imgPositionManager5);
 
             if (photoType == 1 && positionType == 1 && orientationType == 1)  Constants.shiftThePhotoVertikally += shift;
             if (photoType == 1 && positionType == 1 && orientationType == 2)  Constants.shiftThePhotoHorizontally += shift;

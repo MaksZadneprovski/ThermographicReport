@@ -19,21 +19,17 @@ import java.util.stream.IntStream;
 public class ExcelListCreator {
 
     public static void creatingExcelList(){
-
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите количество фото :");
-        int quantityObj = Integer.parseInt(scanner.nextLine());
+        int quantityObj = Integer.parseInt(UserInput.excelListCreator1);
 
-        System.out.println("Введите через пробел номер фото с несколькими термограммами, если таких нет нажмите Enter");
-        String str = scanner.nextLine();
+        String str = UserInput.excelListCreator2;
 
         int[] arr = new int[200];
         int[] arr2 = new int[100];
 
         if (!str.isEmpty()) {
             arr = Arrays.stream(str.split(" ")).mapToInt(Integer::parseInt).toArray();
-            System.out.println("Если есть пункты с тремя и более термограммами, перечислите через пробел, если нет нажмите Enter");
-            String str2 = scanner.nextLine();
+            String str2 = UserInput.excelListCreator3;
             arr2 = Arrays.stream(str2.split(" ")).mapToInt(Integer::parseInt).toArray();
         }
 
@@ -44,7 +40,7 @@ public class ExcelListCreator {
                 if(IntStream.of(arr2).anyMatch(x -> x == n)){
 
                     System.out.println("Сколько термограмм  в "+ i +" пункте");
-                    TempData.measurementObjectList.add(new MeasurementObject( Integer.parseInt(scanner.next())));
+                    TempData.measurementObjectList.add(new MeasurementObject( Integer.parseInt(scanner.nextLine())));
 
                 }else {
                     TempData.measurementObjectList.add(new MeasurementObject( 2));
@@ -54,9 +50,6 @@ public class ExcelListCreator {
                 TempData.measurementObjectList.add(new MeasurementObject(1));
             }
         }
-
-
         scanner.close();
-        System.out.println("Программа выполняется, подождите");
     }
 }

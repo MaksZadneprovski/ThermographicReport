@@ -15,6 +15,7 @@ import java.text.ParseException;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException, ParseException {
+        System.out.println("Программа выполняется, подождите");
 
 
         //new HttpRequest().doRequest();
@@ -26,6 +27,9 @@ public class Main {
 
         // Установка коэф. размера
         ImgSizeManager.setSizeImage();
+
+        // Конвертация PDF to XLSX
+        new PdfToXlsxConverter().convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
 
         // Парсинг содержания и добавление заголовков в очередь
         System.out.println("Парсинг содержания и добавление заголовков в очередь");
@@ -83,9 +87,13 @@ public class Main {
 
         TempData.measurementObjectList.forEach(System.out::println);
 
+        // Удаление ненужных файлов
+        System.out.println("Удаление ненужных файлов");
+        FileHelper.deleteXLSXReport();
+        FileHelper.deleteSaveFiles();
+
         long timeFinish = System.currentTimeMillis();
         System.out.println("Отчет успешно создан за : "+(timeFinish-timeStart)/1000 +"с "+ (timeFinish-timeStart)%10 + "мс");
         Thread.sleep(4000);
-
     }
 }

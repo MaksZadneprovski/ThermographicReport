@@ -34,19 +34,17 @@ public class FileHelper {
         }
     }
 
-    // Удаляет фото после сделанного отчета
+    // Удаление старых изображений
     public static void deleteSaveFiles()  {
         try {
             FileUtils.deleteDirectory(Constants.PATH_TO_SAVED_TERMO.toFile());
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Не удалось удалить сохраненные термограммы");
         }
         try {
             FileUtils.deleteDirectory(Constants.PATH_TO_SAVED_PHOTO.toFile());
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Не удалось удалить сохраненные фото");
         }
         try {
             createPathIfNotExist(Constants.PATH_TO_SAVED_TERMO);
@@ -57,12 +55,17 @@ public class FileHelper {
     }
     // Удаляет файл отчета из проекта
     public static void deleteTempForProject()  {
-
         try {
             Files.deleteIfExists(Constants.PATH_CREATED_PROTOKOL);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Не удалось удалить предыдущий протокол ");
+        }
+    }
+    public static void deleteXLSXReport() {
+        try {
+            Files.deleteIfExists(Constants.PATH_TABLESXLSX);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     // Перемещает шаблон отчета из папки в папку проекта
