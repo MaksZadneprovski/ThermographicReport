@@ -24,7 +24,9 @@ public class ExcelListCreator {
             arr = Arrays.stream(str.split(" ")).mapToInt(Integer::parseInt).toArray();
             System.out.println("Если есть пункты с тремя и более термограммами, перечислите через пробел, если нет нажмите Enter");
             String str2 = scanner.nextLine();
-            arr2 = Arrays.stream(str2.split(" ")).mapToInt(Integer::parseInt).toArray();
+            if (!str2.isEmpty()){
+                arr2 = Arrays.stream(str2.split(" ")).mapToInt(Integer::parseInt).toArray();
+            }
         }
 
         for (int i = 1; i <= quantityObj ; i++) {

@@ -5,6 +5,7 @@ import constants.Constants;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -35,7 +36,7 @@ public class ImgPositionManager {
             if (photoType == 2 && positionType == 2 && orientationType == 2)  Constants.shiftHorizontalTermoHorizontally += shift;
 
 
-            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(".").toAbsolutePath().getParent().resolve("shifts.txt"))) {
+            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Path.of("D:\\NoosferaProgram\\program files\\shifts.txt"))) {
                 bufferedWriter.write(Constants.shiftHorizontalPhotoHorizontally + " "+ Constants.shiftHorizontalPhotoVertically+" "+ Constants.shiftThePhotoVertikally+" "+
                         Constants.shiftThePhotoHorizontally+" "+ Constants.shiftHorizontalTermoHorizontally +" "+ Constants.shiftHorizontalTermoVertically+" "+
                         Constants.shiftTheTermoVertikally  +" "+ Constants.shiftTheTermoHorizontally);

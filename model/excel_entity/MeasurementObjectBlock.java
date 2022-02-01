@@ -37,15 +37,17 @@ public class MeasurementObjectBlock {
 
         this.isExistPhoto = isExistPhoto;
 
-        if (!TempData.pathListTermo.isEmpty()) {
-            this.termo = new ImgEntity(isUpBlock, TempData.pathListTermo.poll().toString());
-        }
+
         if(isExistPhoto){
 
             if (!TempData.pathListPhoto.isEmpty()) {
                 this.photo = new ImgEntity(isUpBlock, TempData.pathListPhoto.poll().toString());
             }
 
+            if (!TempData.pathListTermo.isEmpty()) {
+                this.termo = new ImgEntity(isUpBlock, TempData.pathListTermo.poll().toString());
+            }
+        }else {
             if (!TempData.pathListTermo.isEmpty()) {
                 this.termo = new ImgEntity(isUpBlock, TempData.pathListTermo.poll().toString());
             }

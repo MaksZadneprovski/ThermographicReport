@@ -30,7 +30,7 @@ public class ImgSizeManager {
                 System.out.println("Сейчас коэффициент " + Constants.kTermo + "\nУстановите новый");
                 Constants.kTermo = Double.parseDouble(scanner.next());
             }
-            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(".").toAbsolutePath().getParent().resolve("sizes.txt"))) {
+            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(".").toAbsolutePath().getParent().resolve("program files").resolve("sizes.txt"))) {
                 bufferedWriter.write(Constants.kPhotoVertical + " "+ Constants.kPhotoHorizontal+" "+ Constants.kTermo);
             } catch (IOException e) {
                 e.printStackTrace();

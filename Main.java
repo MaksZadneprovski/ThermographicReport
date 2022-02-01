@@ -1,4 +1,5 @@
 
+import data.TempData;
 import utils.*;
 import constants.Constants;
 import file_visitors.AddPhotoIntoQueueFileVisitor;
@@ -62,9 +63,12 @@ public class Main {
         Files.walkFileTree(Constants.PATH_TO_SAVED_PHOTO, new AddPhotoIntoQueueFileVisitor());
         Files.walkFileTree(Constants.PATH_TO_SAVED_TERMO, new AddTermoIntoQueueFileVisitor());
 
+        System.out.println(TempData.pathListTermo);
+
         System.out.println("    10 из 14 Подготовка структуры файла отчета ");
         // Подготовка файла шаблона
         ExcelListCreator.creatingExcelList();
+        TempData.measurementObjectList.forEach(x -> x.getMeasurementObjectBlockList().forEach(System.out::println));
 
         // Вставка заголовков в отчет
         System.out.println("    11 из 14 Вставка заголовков в отчет");
@@ -80,10 +84,9 @@ public class Main {
 
         // Удаление ненужных файлов
         System.out.println("    14 из 14 Удаление ненужных файлов");
-        FileHelper.deleteXLSXReport();
-        FileHelper.deleteSaveFiles();
+        //FileHelper.deleteXLSXReport();
+        //FileHelper.deleteSaveFiles();
 
         System.out.println("    Отчет успешно создан ");
-        Thread.sleep(4000);
     }
 }

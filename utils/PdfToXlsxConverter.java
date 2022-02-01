@@ -26,7 +26,6 @@ public class PdfToXlsxConverter {
             int r=0;
 
             PDDocument document = PDDocument.load(new File(pathOf));// here file1.pdf is the name of pdf file which we want to read....
-            document.getClass();
             if (!document.isEncrypted())
             {
                 PDFTextStripperByArea stripper = new PDFTextStripperByArea();
