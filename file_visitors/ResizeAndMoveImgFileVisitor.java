@@ -16,6 +16,7 @@ public class ResizeAndMoveImgFileVisitor extends SimpleFileVisitor<Path> {
 
         if (!Files.isDirectory(file)){
             Img img = new Img(file);
+            ImageHelper.determineSizeAndType(img);
             ImageHelper.resizeAndMoveImg(img);
         }
         return FileVisitResult.CONTINUE;

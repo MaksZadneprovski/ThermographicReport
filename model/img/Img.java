@@ -1,7 +1,7 @@
 package model.img;
 
 import lombok.Data;
-import utils.ImageHelper;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,7 +22,6 @@ public class Img {
         this.path = path;
         this.fileName = path.getFileName().toString();
         bufferedImageInput = ImageIO.read(new File(path.toString()));
-        ImageHelper.determineSizeAndType(this);
     }
 
 

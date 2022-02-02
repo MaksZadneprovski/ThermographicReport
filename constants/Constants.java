@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Constants {
 
@@ -23,7 +22,8 @@ public class Constants {
         //1.28
         public static double kPhotoVertical;
         public static double kPhotoHorizontal;
-        public static double kTermo;
+        public static double kTermoHorizontal;
+        public static double kTermoVertical;
 
         public static  String key;
 
@@ -33,7 +33,8 @@ public class Constants {
                         String[] s = bufferedReader.readLine().split(" ");
                         kPhotoVertical = Double.parseDouble(s[0]);
                         kPhotoHorizontal = Double.parseDouble(s[1]);
-                        kTermo = Double.parseDouble(s[1]);
+                        kTermoHorizontal = Double.parseDouble(s[2]);
+                        kTermoVertical = Double.parseDouble(s[3]);
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
@@ -60,10 +61,10 @@ public class Constants {
                 }
         }
 
-        public static int widthTermoVertical = (int) (330.0 * kTermo);
-        public static int heightTermoVertical = (int) (314.0 * kTermo);
-        public static int widthTermoHorizontal = (int) (330.0 * kTermo);
-        public static int heightTermoHorizontal = (int) (202.0 * kTermo);
+        public static int widthTermoVertical = (int) (330.0 * kTermoHorizontal);
+        public static int heightTermoVertical = (int) (314.0 * kTermoHorizontal);
+        public static int widthTermoHorizontal = (int) (330.0 * kTermoHorizontal);
+        public static int heightTermoHorizontal = (int) (202.0 * kTermoHorizontal);
 
         public static int widthPhotoVertical = (int) (135.0 * kPhotoVertical);
         public static int heightPhotoVertical = (int) (180.0 * kPhotoVertical);

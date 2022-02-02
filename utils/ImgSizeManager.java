@@ -5,7 +5,7 @@ import constants.Constants;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class ImgSizeManager {
@@ -27,11 +27,18 @@ public class ImgSizeManager {
                 }
             }
             if(photoType == 2) {
-                System.out.println("Сейчас коэффициент " + Constants.kTermo + "\nУстановите новый");
-                Constants.kTermo = Double.parseDouble(scanner.next());
+                System.out.println("Вертикальные - 1   Горизонтальные - 2");
+                if (Integer.parseInt(scanner.next()) == 1) {
+                    System.out.println("Сейчас коэффициент " + Constants.kTermoVertical + "\nУстановите новый");
+                    Constants.kTermoVertical = Double.parseDouble(scanner.next());
+                } else {
+                    System.out.println("Сейчас коэффициент " + Constants.kTermoHorizontal + "\nУстановите новый");
+                    Constants.kTermoHorizontal = Double.parseDouble(scanner.next());
+                }
             }
-            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(".").toAbsolutePath().getParent().resolve("program files").resolve("sizes.txt"))) {
-                bufferedWriter.write(Constants.kPhotoVertical + " "+ Constants.kPhotoHorizontal+" "+ Constants.kTermo);
+            //try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(".").toAbsolutePath().getParent().resolve("program files").resolve("sizes.txt"))) {
+            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Path.of("D:\\NoosferaProgram\\program files\\sizes.txt"))) {
+                bufferedWriter.write(Constants.kPhotoVertical + " "+ Constants.kPhotoHorizontal+" "+ Constants.kTermoHorizontal);
             } catch (IOException e) {
                 e.printStackTrace();
             }
