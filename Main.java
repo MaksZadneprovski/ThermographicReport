@@ -16,23 +16,7 @@ public class Main {
 
         //new HttpRequest().doRequest();
         //new KeyVerification().verify();
-
-        // Установка смещения фото
-        ImgPositionManager.changeShift();
-
-        // Установка коэф. размера
-        ImgSizeManager.setSizeImage();
-
-        // Конвертация PDF to XLSX
-        PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
-
-        // Парсинг содержания и добавление заголовков в очередь
-        System.out.println("    1 из 14 Парсинг содержания и добавление заголовков в очередь");
-        new HeadersCreator().completeHeadersQueue();
-
-        // Парсинг таблиц и добавление температур в очередь
-        System.out.println("    2 из 14 Парсинг таблиц и добавление температур в очередь");
-        new TablesCreator().getTablesFromContents();
+        long t0 = System.currentTimeMillis();
 
         // Проверка наличия папок для создания отчета
         System.out.println("    3 из 14 Проверка наличия папок для создания отчета");
@@ -42,6 +26,38 @@ public class Main {
         System.out.println("    4 из 14 Удаление старых изображений");
         FileHelper.deleteSaveFiles();
 
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // Конвертация изображений
+                System.out.println("    7 из 14 Конвертация изображений");
+                try {
+                    Files.walkFileTree(Constants.PATH_PICTURES, new ResizeAndMoveImgFileVisitor());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+
+        // Парсинг содержания и добавление заголовков в очередь
+        System.out.println("    1 из 14 Парсинг содержания и добавление заголовков в очередь");
+        new HeadersCreator().completeHeadersQueue();
+
+        // Парсинг таблиц и добавление температур в очередь
+        System.out.println("    2 из 14 Парсинг таблиц и добавление температур в очередь");
+        new TablesCreator().getTablesFromContents();
+
+
+        // Установка смещения фото
+        ImgPositionManager.changeShift();
+        // Установка коэф. размера
+        ImgSizeManager.setSizeImage();
+
+
+        // Конвертация PDF to XLSX
+        PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
+
         //Удаление старого отчета
         System.out.println("    5 из 14 Удаление старого отчета");
         FileHelper.deleteTempForProject();
@@ -50,10 +66,7 @@ public class Main {
         System.out.println("    6 из 14 Подготовка шаблона");
         FileHelper.movingTemplates();
 
-        // Конвертация изображений
-        System.out.println("    7 из 14 Конвертация изображений");
-        Files.walkFileTree(Constants.PATH_PICTURES, new ResizeAndMoveImgFileVisitor());
-
+        thread.join();
         // Проверка наличия сковертированных фото для отчета
         System.out.println("    8 из 14 Проверка наличия сковертированных фото для отчета");
         FileHelper.changedPhotoAvailabilityCheck();
@@ -65,8 +78,9 @@ public class Main {
 
         System.out.println(TempData.pathListTermo);
 
+
+        // Подготовка структуры файла отчета
         System.out.println("    10 из 14 Подготовка структуры файла отчета ");
-        // Подготовка файла шаблона
         ExcelListCreator.creatingExcelList();
         TempData.measurementObjectList.forEach(x -> x.getMeasurementObjectBlockList().forEach(System.out::println));
 
@@ -88,5 +102,11 @@ public class Main {
         //FileHelper.deleteSaveFiles();
 
         System.out.println("    Отчет успешно создан ");
+
+        long t4 = System.currentTimeMillis();
+
+        System.out.println(t4-t0);
+
+
     }
 }

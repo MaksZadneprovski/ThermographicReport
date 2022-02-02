@@ -43,6 +43,5 @@ public class ImgSizeManager {
                 e.printStackTrace();
             }
         }
-
     }
 }
