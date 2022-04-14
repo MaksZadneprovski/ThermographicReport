@@ -7,41 +7,40 @@ import file_visitors.ResizeAndMoveImgFileVisitor;
 import file_visitors.AddTermoIntoQueueFileVisitor;
 
 
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException, ParseException {
-
-        //new HttpRequest().doRequest();
-        //new KeyVerification().verify();
-        long t0 = System.currentTimeMillis();
+    public static void main(String[] args) throws IOException, InterruptedException, ParseException, AWTException {
 
         // Проверка наличия папок для создания отчета
-        System.out.println("    3 из 14 Проверка наличия папок для создания отчета");
+        System.out.println("Проверка наличия папок для создания отчета");
         FileHelper.checkPaths();
 
-        // Удаление старых изображений
-        System.out.println("    4 из 14 Удаление старых изображений");
-        FileHelper.deleteSaveFiles();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Нужно ли конвертировать картинки?      1 - Да        Enter - Нет");
+        if ( scanner.nextLine().equals("1")) {
 
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Конвертация изображений
-                System.out.println("    7 из 14 Конвертация изображений");
-                try {
-                    Files.walkFileTree(Constants.PATH_PICTURES, new ResizeAndMoveImgFileVisitor());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            // Удаление старых изображений
+            System.out.println("Удаление старых изображений");
+            FileHelper.deleteSaveFiles();
+
+            // Конвертация изображений
+            System.out.println("Конвертация изображений");
+            try {
+                Files.walkFileTree(Constants.PATH_PICTURES, new ResizeAndMoveImgFileVisitor());
+                showMessage("Конвертация картинок завершена");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
-        thread.start();
+        }
+
 
         // Парсинг содержания и добавление заголовков в очередь
-        System.out.println("    1 из 14 Парсинг содержания и добавление заголовков в очередь");
+        System.out.println("Парсинг содержания и добавление заголовков в очередь");
         new HeadersCreator().completeHeadersQueue();
 
         // Парсинг таблиц и добавление температур в очередь
@@ -54,9 +53,9 @@ public class Main {
         // Установка коэф. размера
         ImgSizeManager.setSizeImage();
 
-
         // Конвертация PDF to XLSX
         PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
+
 
         //Удаление старого отчета
         System.out.println("Удаление старого отчета");
@@ -66,7 +65,6 @@ public class Main {
         System.out.println("Подготовка шаблона");
         FileHelper.movingTemplates();
 
-        thread.join();
         // Проверка наличия сковертированных фото для отчета
         System.out.println("Проверка наличия сковертированных фото для отчета");
         FileHelper.changedPhotoAvailabilityCheck();
@@ -76,13 +74,16 @@ public class Main {
         Files.walkFileTree(Constants.PATH_TO_SAVED_PHOTO, new AddPhotoIntoQueueFileVisitor());
         Files.walkFileTree(Constants.PATH_TO_SAVED_TERMO, new AddTermoIntoQueueFileVisitor());
 
-        System.out.println(TempData.pathListTermo);
+        //  Для отладки
+        //System.out.println(TempData.pathListTermo);
 
 
         // Подготовка структуры файла отчета
         System.out.println("Подготовка структуры файла отчета ");
         ExcelListCreator.creatingExcelList();
-        TempData.measurementObjectList.forEach(x -> x.getMeasurementObjectBlockList().forEach(System.out::println));
+
+        // Вывод в консоль для отладки
+        //TempData.measurementObjectList.forEach(x -> x.getMeasurementObjectBlockList().forEach(System.out::println));
 
         // Вставка заголовков в отчет
         System.out.println("Вставка заголовков в отчет");
@@ -97,16 +98,23 @@ public class Main {
         ImageToExcelMover.addImageInList();
 
         // Удаление ненужных файлов
-        System.out.println("Удаление ненужных файлов");
+        //System.out.println("Удаление ненужных файлов");
         //FileHelper.deleteXLSXReport();
         //FileHelper.deleteSaveFiles();
 
-        System.out.println("Отчет успешно создан ");
+        showMessage("Отчет создан");
+        System.exit(0);
 
-        long t4 = System.currentTimeMillis();
+    }
+    static void showMessage(String message) throws AWTException {
+        if (SystemTray.isSupported()) {
+            SystemTray tray = SystemTray.getSystemTray();
 
-        System.out.println(t4-t0);
-
-
+            java.awt.Image image = Toolkit.getDefaultToolkit().getImage("images/tray.gif");
+            TrayIcon trayIcon = new TrayIcon(image);
+            tray.add(trayIcon);
+            trayIcon.displayMessage("Report", message,
+                    TrayIcon.MessageType.INFO);
+        }
     }
 }
