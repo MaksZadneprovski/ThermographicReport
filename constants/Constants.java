@@ -25,6 +25,11 @@ public class Constants {
         public static double kTermoHorizontal;
         public static double kTermoVertical;
 
+        public static double anglePhotoVertical;
+        public static double anglePhotoHorizontal;
+        public static double angleTermoHorizontal;
+        public static double angleTermoVertical;
+
         public static  String key;
 
         static {
@@ -38,6 +43,17 @@ public class Constants {
                 } catch (IOException e) {
                         e.printStackTrace();
                 }
+                //try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(".").toAbsolutePath().getParent().resolve("program files").resolve("angles.txt"))) {
+                try  (BufferedReader bufferedReader = Files.newBufferedReader(Path.of("D:\\NoosferaProgram\\program files\\angles.txt"))){
+                        String[] s = bufferedReader.readLine().split(" ");
+                        anglePhotoVertical = Double.parseDouble(s[0]);
+                        anglePhotoHorizontal = Double.parseDouble(s[1]);
+                        angleTermoHorizontal = Double.parseDouble(s[2]);
+                        angleTermoVertical = Double.parseDouble(s[3]);
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
 //                try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(".").toAbsolutePath().getParent().resolve("program files").resolve("shifts.txt"))){
                 try (BufferedReader bufferedReader = Files.newBufferedReader(Path.of("D:\\NoosferaProgram\\program files\\shifts.txt"))){
                         String []s = bufferedReader.readLine().split(" ");

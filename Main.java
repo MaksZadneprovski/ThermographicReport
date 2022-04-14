@@ -45,7 +45,7 @@ public class Main {
         new HeadersCreator().completeHeadersQueue();
 
         // Парсинг таблиц и добавление температур в очередь
-        System.out.println("    2 из 14 Парсинг таблиц и добавление температур в очередь");
+        System.out.println("Парсинг таблиц и добавление температур в очередь");
         new TablesCreator().getTablesFromContents();
 
 
@@ -59,20 +59,20 @@ public class Main {
         PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
 
         //Удаление старого отчета
-        System.out.println("    5 из 14 Удаление старого отчета");
+        System.out.println("Удаление старого отчета");
         FileHelper.deleteTempForProject();
 
         // Подготовка шаблона
-        System.out.println("    6 из 14 Подготовка шаблона");
+        System.out.println("Подготовка шаблона");
         FileHelper.movingTemplates();
 
         thread.join();
         // Проверка наличия сковертированных фото для отчета
-        System.out.println("    8 из 14 Проверка наличия сковертированных фото для отчета");
+        System.out.println("Проверка наличия сковертированных фото для отчета");
         FileHelper.changedPhotoAvailabilityCheck();
 
         // Распределение и добавление фото и термограмм в разные списки
-        System.out.println("    9 из 14 Распределение и добавление фото и термограмм в разные списки");
+        System.out.println("Распределение и добавление фото и термограмм в разные списки");
         Files.walkFileTree(Constants.PATH_TO_SAVED_PHOTO, new AddPhotoIntoQueueFileVisitor());
         Files.walkFileTree(Constants.PATH_TO_SAVED_TERMO, new AddTermoIntoQueueFileVisitor());
 
@@ -80,28 +80,28 @@ public class Main {
 
 
         // Подготовка структуры файла отчета
-        System.out.println("    10 из 14 Подготовка структуры файла отчета ");
+        System.out.println("Подготовка структуры файла отчета ");
         ExcelListCreator.creatingExcelList();
         TempData.measurementObjectList.forEach(x -> x.getMeasurementObjectBlockList().forEach(System.out::println));
 
         // Вставка заголовков в отчет
-        System.out.println("    11 из 14 Вставка заголовков в отчет");
+        System.out.println("Вставка заголовков в отчет");
         new HeadersCreator().createHeaders();
 
         // Вставка таблиц в отчет
-        System.out.println("    12 из 14 Вставка таблиц в отчет");
+        System.out.println("Вставка таблиц в отчет");
         new TablesCreator().createTables();
 
         // Вставка термограмм и фото в отчет
-        System.out.println("    13 из 14 Вставка термограмм и фото в отчет");
+        System.out.println("Вставка термограмм и фото в отчет");
         ImageToExcelMover.addImageInList();
 
         // Удаление ненужных файлов
-        System.out.println("    14 из 14 Удаление ненужных файлов");
+        System.out.println("Удаление ненужных файлов");
         //FileHelper.deleteXLSXReport();
         //FileHelper.deleteSaveFiles();
 
-        System.out.println("    Отчет успешно создан ");
+        System.out.println("Отчет успешно создан ");
 
         long t4 = System.currentTimeMillis();
 

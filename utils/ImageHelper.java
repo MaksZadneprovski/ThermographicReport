@@ -47,25 +47,31 @@ public class ImageHelper {
 //
 //        ImageIO.write(bufferedImageOutput, Constants.formatName, new File(Util.generateName(img)));
         double kScale = 0;
+        double angle = 0;
 
         switch (img.getType()){
             case PHOTO_VERTICAL:
                 kScale = Constants.kPhotoVertical;
+                angle = Constants.anglePhotoVertical;
                 break;
             case PHOTO_HORIZONTAL:
                 kScale = Constants.kPhotoHorizontal;
+                angle = Constants.anglePhotoHorizontal;
                 break;
             case THERMO_HORIZONTAL:
                 kScale = Constants.kTermoHorizontal;
+                angle = Constants.angleTermoHorizontal;
                 break;
             case THERMO_VERTICAL:
                 kScale = Constants.kTermoVertical;
+                angle = Constants.angleTermoVertical;
                 break;
         }
 
         Thumbnails.of(new File(img.getPath().toString()))
                 //.size( img.getHeight(),img.getWidth())
                 .scale(kScale)
+                .rotate(angle)
                 .outputFormat("JPEG")
                 .outputQuality(1.0)
                 .toFile(new File(Util.generateName(img)));
