@@ -20,6 +20,11 @@ public class Main {
         System.out.println("Проверка наличия папок для создания отчета");
         FileHelper.checkPaths();
 
+        // Установка смещения фото
+        ImgPositionManager.changeShift();
+        // Установка коэф. размера
+        ImgSizeManager.setSizeImage();
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("Нужно ли конвертировать картинки?      1 - Да        Enter - Нет");
         if ( scanner.nextLine().equals("1")) {
@@ -38,6 +43,8 @@ public class Main {
             }
         }
 
+        // Конвертация PDF to XLSX
+        PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
 
         // Парсинг содержания и добавление заголовков в очередь
         System.out.println("Парсинг содержания и добавление заголовков в очередь");
@@ -47,14 +54,6 @@ public class Main {
         System.out.println("Парсинг таблиц и добавление температур в очередь");
         new TablesCreator().getTablesFromContents();
 
-
-        // Установка смещения фото
-        ImgPositionManager.changeShift();
-        // Установка коэф. размера
-        ImgSizeManager.setSizeImage();
-
-        // Конвертация PDF to XLSX
-        PdfToXlsxConverter.convert2(Constants.PATH_TABLESPDF.toString(),Constants.PATH_TABLESXLSX.toString());
 
 
         //Удаление старого отчета

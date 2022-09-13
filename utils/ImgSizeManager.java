@@ -38,7 +38,7 @@ public class ImgSizeManager {
             }
             //try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Paths.get(".").toAbsolutePath().getParent().resolve("program files").resolve("sizes.txt"))) {
             try (BufferedWriter bufferedWriter = Files.newBufferedWriter(Path.of("D:\\NoosferaProgram\\program files\\sizes.txt"))) {
-                bufferedWriter.write(Constants.kPhotoVertical + " "+ Constants.kPhotoHorizontal+" "+ Constants.kTermoHorizontal);
+                bufferedWriter.write(Constants.kPhotoVertical + " "+ Constants.kPhotoHorizontal+" "+ Constants.kTermoHorizontal +" "+ Constants.kTermoVertical);
             } catch (IOException e) {
                 e.printStackTrace();
             }
